@@ -1,0 +1,548 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="决策树(Descision Tree)1.基本概念决策树(Decision Tree)决策树是一种机器学习算法，一棵决策树包含一个根结点，若干内部结点和若干叶子节点；叶子节点对应于决策结果，其他的每个节点对于与一个属性测试；每个节点包括的样本集合根据属性测试结果被划分到子节点中，根节点包含样本全集。A decision tree is a flowchart-like structure in w">
+<meta property="og:type" content="article">
+<meta property="og:title" content="决策树Decision Tree">
+<meta property="og:url" content="http://example.com/2021/12/17/%E5%86%B3%E7%AD%96%E6%A0%91/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="决策树(Descision Tree)1.基本概念决策树(Decision Tree)决策树是一种机器学习算法，一棵决策树包含一个根结点，若干内部结点和若干叶子节点；叶子节点对应于决策结果，其他的每个节点对于与一个属性测试；每个节点包括的样本集合根据属性测试结果被划分到子节点中，根节点包含样本全集。A decision tree is a flowchart-like structure in w">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/tree.svg">
+<meta property="article:published_time" content="2021-12-17T12:27:27.000Z">
+<meta property="article:modified_time" content="2021-12-18T04:38:40.962Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Mechaine Learning">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/tree.svg">
+  
+  <title>决策树Decision Tree - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Wangke&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="决策树Decision Tree">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-17 20:27" pubdate>
+        December 17, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">决策树Decision Tree</h1>
+            
+            <div class="markdown-body">
+              <h1 id="决策树-Descision-Tree"><a href="#决策树-Descision-Tree" class="headerlink" title="决策树(Descision Tree)"></a>决策树(Descision Tree)</h1><h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1.基本概念"></a>1.基本概念</h2><h3 id="决策树-Decision-Tree"><a href="#决策树-Decision-Tree" class="headerlink" title="决策树(Decision Tree)"></a><strong>决策树(Decision Tree)</strong></h3><p>决策树是一种机器学习算法，一棵决策树包含一个根结点，若干内部结点和若干叶子节点；叶子节点对应于决策结果，其他的每个节点对于与一个属性测试；每个节点包括的样本集合根据属性测试结果被划分到子节点中，根节点包含样本全集。<br>A decision tree is a flowchart-like structure in which each internal node represents a “test” on an attribute (e.g. whether a coin flip comes up heads or tails), each branch represents the outcome of the test, and each leaf node represents a class label (decision taken after computing all attributes). The paths from root to leaf represent classification rules.</p>
+<h3 id="信息熵-Information-entropy"><a href="#信息熵-Information-entropy" class="headerlink" title="信息熵(Information entropy)"></a><strong>信息熵(Information entropy)</strong></h3><p>信息熵是度量样本集合纯度的一种指标，样本集合$D$中第$k$类样本所占比例为$p_k(k = 1,2,…,|y|)$，则$D$的信息熵定义为：<br>Entropy is an information theory metric that measures the impurity or uncertainty in a group of observations. </p>
+<script type="math/tex; mode=display">
+H(D) = -\sum_{k=1}^{|y| }p_klog_2p_k</script><p>entropy的值越小，样本<script type="math/tex">D</script>的纯度越高。</p>
+<h3 id="信息增益-Information-gain"><a href="#信息增益-Information-gain" class="headerlink" title="信息增益(Information gain)"></a><strong>信息增益(Information gain)</strong></h3><p>假定属性$a$有$V$个可能的取值${a^1,a^2,…,a^V}$,用$a$对样本$D$进行划分，产生$V$个分支节点，第$v$个分支节点包含了$D$中所有在属性$a$上取值为$a^v$的样本，记作$D^v$，计算出$D^v$的信息熵，并根据样本数赋予权重，与$D$的信息熵做差得到的结果就是信息增益<br>Information Gain is the expected reduction in entropy caused by partitioning the examples according to a given attribute</p>
+<script type="math/tex; mode=display">
+IG(D,a) = H(D) - \sum_{v=1}^{V}\frac{|D^v|}{|D|}H(D^v)</script><p>信息增益越大，纯度提升越大，信息增益可以用来进行决策树划分属性时的选择。</p>
+<h3 id="增益率-Information-Gain-ratio"><a href="#增益率-Information-Gain-ratio" class="headerlink" title="增益率(Information Gain ratio)"></a><strong>增益率(Information Gain ratio)</strong></h3><p>信息增益对取值数目较多的属性有所偏好，为了减少这种偏好带来的不利影响C4.5决策树算法采用增益率来划分最优属性：<br>Gain Ratio attempts to lessen the bias of Information Gain on highly branched predictors by introducing a normalizing term called the Intrinsic Information, it is how hard for us to guess in which branch a randomly selected sample is put into.</p>
+<script type="math/tex; mode=display">
+IGR = \frac{IG(D,a)}{-\sum_{v=1}^{V}\frac{|D^v|}{|D|}log_2\frac{|D^v|}{|D|}}</script><h3 id="基尼指数-Gini-impurity-Gini-index"><a href="#基尼指数-Gini-impurity-Gini-index" class="headerlink" title="基尼指数(Gini impurity / Gini index)"></a><strong>基尼指数(Gini impurity / Gini index)</strong></h3><p>基尼系数是另一种选择划分属性的度量方式：<br>Gini Index, also known as Gini impurity, calculates the amount of probability of a specific feature that is classified incorrectly when selected randomly. </p>
+<script type="math/tex; mode=display">
+Gini = 1 - \sum_{k=1}^{|y|}p_k^2</script><p>属性<script type="math/tex">a</script>的基尼指数定义为：</p>
+<script type="math/tex; mode=display">
+Gini(D,a) = \sum_{v=1}^V\frac{|D^v|}{|D|}Gini(D^v)</script><p>应该选择使得划分后基尼指数最小的属性作为最优划分。</p>
+<h2 id="2-分类树代码实现"><a href="#2-分类树代码实现" class="headerlink" title="2.分类树代码实现"></a>2.分类树代码实现</h2><p>使用sklearn库的DecisionTreeClassifier类实现决策树：</p>
+<h3 id="1-导入模块"><a href="#1-导入模块" class="headerlink" title="1.导入模块"></a>1.导入模块</h3><div class="code-wrapper"><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> sklearn <span class="token keyword">import</span> tree
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>datasets <span class="token keyword">import</span> load_wine
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>model_selection <span class="token keyword">import</span> train_test_split<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="2-数据整理"><a href="#2-数据整理" class="headerlink" title="2.数据整理"></a>2.数据整理</h3><p>这里使用sklearn库里自带的红酒分类问题数据集，对其进行简单整理。使用train_test_split方法切割数据，将数据集划分为训练集和测试集，test_size参数指定数据集中的多少数据被划分为测试集。</p>
+<div class="code-wrapper"><pre class="line-numbers language-python" data-language="python"><code class="language-python">wine <span class="token operator">=</span> load_wine<span class="token punctuation">(</span><span class="token punctuation">)</span>
+x <span class="token operator">=</span> wine<span class="token punctuation">.</span>data
+y <span class="token operator">=</span> wine<span class="token punctuation">.</span>target
+x_train<span class="token punctuation">,</span> x_test<span class="token punctuation">,</span> y_train<span class="token punctuation">,</span> y_test <span class="token operator">=</span> train_test_split<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> test_size<span class="token operator">=</span><span class="token number">0.3</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="3-创建决策树"><a href="#3-创建决策树" class="headerlink" title="3.创建决策树"></a>3.创建决策树</h3><p>DecisionTreeClassifier中参数较多，详见官方文档<a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier">sklearn.tree.DecisionTreeClassifier — scikit-learn 1.0.1 documentation</a></p>
+<div class="code-wrapper"><pre class="line-numbers language-python" data-language="python"><code class="language-python">clf <span class="token operator">=</span> tree<span class="token punctuation">.</span>DecisionTreeClassifier<span class="token punctuation">(</span>criterion<span class="token operator">=</span><span class="token string">"entropy"</span><span class="token punctuation">)</span>
+clf <span class="token operator">=</span> clf<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>x_train<span class="token punctuation">,</span> y_train<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+<h3 id="4-查看结果"><a href="#4-查看结果" class="headerlink" title="4.查看结果"></a>4.查看结果</h3><p>用predict函数可以获取在测试集上的分类结果，score函数可以计算分类结果的准确性，因为训练集和测试集是随机划分的所以每次的分类结果也不同，用export<em>graphviz函数可以输出文字描述版的决策树，用graphviz库可以画出图形版，也可以用在线graphviz工具绘图Graphviz Online (dreampuf.github.io)，用feature_importances</em>可以查看每个特征对决策树的重要性，进一步地，可以用zip连接特征名和重要性，用元组更直观地显示。</p>
+<div class="code-wrapper"><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>y_test<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>clf<span class="token punctuation">.</span>predict<span class="token punctuation">(</span>x_test<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">'''
+[1 1 1 1 2 1 1 0 1 2 0 1 1 1 1 1 2 2 1 0 0 2 2 1 2 1 2 2 1 0 1 1 0 1 2 0 0
+ 1 1 0 2 2 0 0 1 0 2 2 1 1 2 1 0 1]
+[1 1 1 1 2 1 1 0 1 1 0 1 1 2 1 1 2 2 1 0 1 2 2 1 2 1 2 2 0 0 1 1 0 1 2 0 0
+ 1 1 0 2 2 0 0 1 0 2 2 1 1 2 1 0 1]
+'''</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>clf<span class="token punctuation">.</span>score<span class="token punctuation">(</span>x_test<span class="token punctuation">,</span> y_test<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token triple-quoted-string string">'''
+0.8888888888888888
+'''</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>tree<span class="token punctuation">.</span>export_graphviz<span class="token punctuation">(</span>clf<span class="token punctuation">,</span> feature_names<span class="token operator">=</span>wine<span class="token punctuation">.</span>feature_names<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>clf<span class="token punctuation">.</span>feature_importances_<span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">'''
+[0.         0.         0.         0.         0.         0.
+ 0.18282092 0.         0.         0.11448317 0.         0.29232129
+ 0.41037462]
+'''</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token builtin">zip</span><span class="token punctuation">(</span>wine<span class="token punctuation">.</span>feature_names<span class="token punctuation">,</span> clf<span class="token punctuation">.</span>feature_importances_<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">'''
+('alcohol', 0.0) ('malic_acid', 0.0) ('ash', 0.0) ('alcalinity_of_ash', 0.02419121930221919) ('magnesium', 0.0) ('total_phenols', 0.0) ('flavanoids', 0.4905897993195419) ('nonflavanoid_phenols', 0.0) ('proanthocyanins', 0.0) ('color_intensity', 0.3325545520401627) ('hue', 0.0) ('od280/od315_of_diluted_wines', 0.0) ('proline', 0.15266442933807614)
+
+'''</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p><img src="/img/tree.svg" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="5-减枝优化"><a href="#5-减枝优化" class="headerlink" title="5.减枝优化"></a>5.减枝优化</h3><p>不加限制的情况下，一颗决策树有可能过拟合，在训练集上表现很好，但在测试集上表现糟糕，为了让决策树有更好的泛化性，需要对决策树进行剪枝。在用sklearn的DecisionTreeClassifier生成决策树时，可以加入以下参数进行剪枝</p>
+<h4 id="1-max-depth"><a href="#1-max-depth" class="headerlink" title="1.max_depth"></a>1.max_depth</h4><p>限制树的最大深度，默认none，决策树会生长到每个叶子的节点都是pure为止。<br>The maximum depth of the tree. If None, then nodes are expanded until all leaves are pure or until all leaves contain less than min_samples_split samples.</p>
+<h4 id="2-min-samples-leaf"><a href="#2-min-samples-leaf" class="headerlink" title="2.min_samples_leaf"></a>2.min_samples_leaf</h4><p>限制每个叶子节点所包含的最小样本数，如果小于这个数，分支就不会发生，默认值为1。<br>The minimum number of samples required to be at a leaf node.</p>
+<h4 id="3-min-samples-split"><a href="#3-min-samples-split" class="headerlink" title="3.min_samples_split"></a>3.min_samples_split</h4><p>限制分支节点所包含的最小样本数，<br>The minimum number of samples required to split an internal node:</p>
+<h4 id="4-min-impurity-decrease"><a href="#4-min-impurity-decrease" class="headerlink" title="4.min_impurity_decrease"></a>4.min_impurity_decrease</h4><p>限制information gain的大小，小于设定值的分支不会发生，默认值为0。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Mechaine-Learning/">Mechaine Learning</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/17/hello-world/">
+                        <span class="hidden-mobile">Hello World</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
