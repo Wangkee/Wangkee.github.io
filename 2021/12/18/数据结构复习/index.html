@@ -1,0 +1,643 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="数据结构1.时间复杂度1.设计一个算法，求含$n$个整数元素的序列中前$i(1\leq i\leq n)$个元素的最大值。并分析算法的平均时间复杂度。 int fun(int a[], int n, int i) &amp;#123; 	int j, max &#x3D; a[0]; 	for(int j &#x3D; 1 ; j &lt;&#x3D; i-1 ; j++) 	&amp;#123; 		if(a[">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构复习">
+<meta property="og:url" content="http://example.com/2021/12/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="数据结构1.时间复杂度1.设计一个算法，求含$n$个整数元素的序列中前$i(1\leq i\leq n)$个元素的最大值。并分析算法的平均时间复杂度。 int fun(int a[], int n, int i) &amp;#123; 	int j, max &#x3D; a[0]; 	for(int j &#x3D; 1 ; j &lt;&#x3D; i-1 ; j++) 	&amp;#123; 		if(a[">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-18T04:43:56.000Z">
+<meta property="article:modified_time" content="2021-12-18T05:07:45.738Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>数据结构复习 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Wangke&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数据结构复习">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-18 12:43" pubdate>
+        December 18, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据结构复习</h1>
+            
+            <div class="markdown-body">
+              <h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><h2 id="1-时间复杂度"><a href="#1-时间复杂度" class="headerlink" title="1.时间复杂度"></a>1.时间复杂度</h2><p>1.设计一个算法，求含$n$个整数元素的序列中前$i(1\leq i\leq n)$个元素的最大值。并分析算法的平均时间复杂度。</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int fun(int a[], int n, int i)
+&#123;
+	int j, max &#x3D; a[0];
+	for(int j &#x3D; 1 ; j &lt;&#x3D; i-1 ; j++)
+	&#123;
+		if(a[j] &gt; max) max &#x3D; a[i];
+	&#125;
+	return max;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<script type="math/tex; mode=display">
+T(n)=\sum_{i=1}^n\frac{1}{n}\times(i-1)=\frac{1}{n}\sum_{i=1}^n(i-1)=\frac{n-1}{2}=O(n)</script><p>最坏复杂度为$O(n)，i=n$<br>最好复杂度为$O(1)，i=1$</p>
+<p>2.分析以下算法的时间复杂度和空间复杂度。</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">void fun(int n)
+&#123;
+	int s &#x3D; 0,i,j,k;
+	for(int i &#x3D; 0 ; i &lt;&#x3D; n ; i++)
+	&#123;
+		for(int j &#x3D; 0 ; j &lt;&#x3D; i ; j++)
+		&#123;
+			for(int k &#x3D; 0 ; k &lt; j ; k++)
+			&#123;
+				s++;
+			&#125;
+		&#125;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<script type="math/tex; mode=display">
+T(n)=\sum_{i=0}^n\sum_{j=0}^i\sum_{k=0}^{j-1}1=\sum_{i=0}^n\sum_{j=0}^ij=\sum_{i=0}^n(0+1+2\dots+i)=\sum_{i=0}^n(\frac{i(i+1)}{2})\\ \ \ \ \ \ \ \ \ \ \ =\frac{1}{2}(\sum_{i=0}^ni^2+\sum_{i=0}^ni)=\frac{1}{2}(\frac{1}{6}n(n+1)(2n+1)+\frac{1}{2}n(n+1))=O(n^3)</script><p>时间复杂度为$O(n^3)$，空间复杂度为$O(1)$</p>
+<p>3.有如下递归算法，调用上述算法的语句为$fun(a,n,0)$，求其时间复杂度和空间复杂度</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">void fun(int a[], int n, int k)
+&#123;
+	int i;
+	if(k &#x3D;&#x3D; n-1)
+	&#123;
+		for(i &#x3D; 0 ; i &lt; n ; i++)
+		&#123;
+			printf(&quot;%d&quot;,a[i]);
+		&#125;
+	&#125;
+	else
+	&#123;
+		for(int i &#x3D; k ; i &lt; n ; i++)
+		&#123;
+			a[i] &#x3D; a[i]+i*i;
+		&#125;
+		fun(a,n,k+1);
+	&#125;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>假设$fun(a,n,k)$的执行时间为$T_1(n,k)$</p>
+<script type="math/tex; mode=display">
+\ \ \ \ T(n)=T_1(n,0)=n+T_1(n,1)=n+(n-1)+T_1(n,2) \\ \  = \dots=n+(n-1)+\dots+2+T_1(n,n-1)
+\\= \dots=n+(n-1)+\dots+2+n=O(n^2)</script><p>所以调用$fun(a,n,0)$的时间复杂度为$O(n^2)$</p>
+<p>假设$fun(a,n,k)$的空间为$S_1(n,k)$</p>
+<script type="math/tex; mode=display">
+S(n)=S_1(n,0)=1+S_1(n,1)=1+1+\dots+1=O(n)</script><p>以调用$fun(a,n,0)$的空间复杂度为$O(n)$</p>
+<h2 id="2-数据存储"><a href="#2-数据存储" class="headerlink" title="2.数据存储"></a>2.数据存储</h2><p>1.若将$n$阶上三角矩阵A按<strong>列</strong>有限顺序压缩存放在一维数组$B[1,…,(n+1)/2]$中，A中第一个非零元素a(1,1)存于B数组的$b_1$,求$i,j$与$k$的对应关系</p>
+<p>$1\sim j-1$列的元素个数为$\frac{(1+j-1)(j-1)}{2}=\frac{j(j-1)}{2}$</p>
+<p>第$j$列有$i$个元素</p>
+<p>所以$k=\frac{j(j-1)}{2}+i$</p>
+<h2 id="3-模式匹配"><a href="#3-模式匹配" class="headerlink" title="3.模式匹配"></a>3.模式匹配</h2><ul>
+<li>next[j] = k表示什么信息？<br>说明模式串t[j]之前有k个字符已经成功匹配，下一次应当从t[k]开始匹配</li>
+<li>next[j]=-1表示什么信息？<br>说明字符串t[j]之前没有任何用于加速匹配的信息，下一趟应从t的开头即j++(j=0)开始匹配</li>
+<li>分析KMP算法的时间复杂度<br>设主串长为n，子串长为m，求next数组的时间复杂度为$O(m)$，KMP算法的平均时间复杂度为$O(n+m)$，最坏时间复杂度为$O(n\times m)$</li>
+</ul>
+<p>1.求字符串t=”ababaaababaa”的next数组值</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">j</th>
+<th style="text-align:center">0</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">5</th>
+<th style="text-align:center">6</th>
+<th style="text-align:center">7</th>
+<th style="text-align:center">8</th>
+<th style="text-align:center">9</th>
+<th style="text-align:center">10</th>
+<th style="text-align:center">11</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">t[j]</td>
+<td style="text-align:center">a</td>
+<td style="text-align:center">b</td>
+<td style="text-align:center">a</td>
+<td style="text-align:center">b</td>
+<td style="text-align:center">a</td>
+<td style="text-align:center">a</td>
+<td style="text-align:center">a</td>
+<td style="text-align:center">b</td>
+<td style="text-align:center">a</td>
+<td style="text-align:center">b</td>
+<td style="text-align:center">a</td>
+<td style="text-align:center">a</td>
+</tr>
+<tr>
+<td style="text-align:center">next[j]</td>
+<td style="text-align:center">-1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="4-树"><a href="#4-树" class="headerlink" title="4.树"></a>4.树</h2><h3 id="树的性质"><a href="#树的性质" class="headerlink" title="树的性质"></a>树的性质</h3><h6 id="性质1：树中的节点数等于所有节点的度数加1"><a href="#性质1：树中的节点数等于所有节点的度数加1" class="headerlink" title="性质1：树中的节点数等于所有节点的度数加1"></a>性质1：树中的节点数等于所有节点的度数加1</h6><p>1.在一颗度数为$4$的树中，有$20$个度数为$4$的节点，$10$个度数为$3$的节点，$1$个度为$2$的节点，$10$个度为$1$的节点，求该树叶子节点的个数</p>
+<p>设$n$为总节点个数，$n_i$为度为$i(0\leq i \leq m)$的节点个数</p>
+<script type="math/tex; mode=display">
+\ \ n=n_1+2n_2+3n_3+4n_4+1=10+2+30+80+1=123 \\
+n_0=n-(n_1+n_2+n_3+n_4)=123-20-10-1-10=82</script><h6 id="性质2：度为-m-的树第-i-层上至多有-m-i-1-个节点"><a href="#性质2：度为-m-的树第-i-层上至多有-m-i-1-个节点" class="headerlink" title="性质2：度为$m$的树第$i$层上至多有$m^{i-1}$个节点"></a>性质2：度为$m$的树第$i$层上至多有$m^{i-1}$个节点</h6><h6 id="性质3：高度为-h-的-m-次树至多有-1-m-m-2-dots-m-h-1-frac-m-k-1-m-1-个节点"><a href="#性质3：高度为-h-的-m-次树至多有-1-m-m-2-dots-m-h-1-frac-m-k-1-m-1-个节点" class="headerlink" title="性质3：高度为$h$的$m$次树至多有$1+m+m^2+\dots+m^{h-1}=\frac{m^k-1}{m-1}$个节点"></a>性质3：高度为$h$的$m$次树至多有$1+m+m^2+\dots+m^{h-1}=\frac{m^k-1}{m-1}$个节点</h6><h6 id="性质4：具有-n-个节点的-m-次树的最小高度为-lceil-log-m-n-m-1-1-rceil"><a href="#性质4：具有-n-个节点的-m-次树的最小高度为-lceil-log-m-n-m-1-1-rceil" class="headerlink" title="性质4：具有$n$个节点的$m$次树的最小高度为$\lceil log_m(n(m-1)+1)\rceil$"></a>性质4：具有$n$个节点的$m$次树的最小高度为$\lceil log_m(n(m-1)+1)\rceil$</h6><p>2.含有$n$个节点的$3$次树的最小高度是多少？最大高度是多少</p>
+<p>设最小高度为$h$，则有</p>
+<script type="math/tex; mode=display">
+\ \ \ \ 1+3^1+3^2+\cdots+3^{h-2}<n\leq1+3^1+3^2+\cdots+3^{h-1}\\
+\frac{3^{h-1}-1}{2}<n\leq\frac{3^h-1}{2} \\ 3^{h-1}<2n+1\leq3^h \\
+h = \lceil log_3(2n+1)\rceil</script><p>某层有$3$个节点，其余层都只有$1$个节点时高度最大为$n-2$</p>
+<h3 id="二叉树的性质"><a href="#二叉树的性质" class="headerlink" title="二叉树的性质"></a>二叉树的性质</h3><h6 id="性质1：非空二叉树上叶子节点的个数等于双分支节点数加1，即-n-0-n-2-1"><a href="#性质1：非空二叉树上叶子节点的个数等于双分支节点数加1，即-n-0-n-2-1" class="headerlink" title="性质1：非空二叉树上叶子节点的个数等于双分支节点数加1，即$n_0=n_2+1$"></a><strong>性质1：非空二叉树上叶子节点的个数等于双分支节点数加1，即$n_0=n_2+1$</strong></h6><p>3.具有$10$个叶子节点的二叉树中有几个度为$2$的节点</p>
+<script type="math/tex; mode=display">
+n_2=n_0-1=10-1-9</script><h6 id="性质2：非空二叉树上的第-i-层至多有-2-i-1-个节点"><a href="#性质2：非空二叉树上的第-i-层至多有-2-i-1-个节点" class="headerlink" title="性质2：非空二叉树上的第$i$层至多有$2^{i-1}$个节点"></a>性质2：非空二叉树上的第$i$层至多有$2^{i-1}$个节点</h6><h6 id="性质3：高度为-h-的二叉树至多有-1-2-2-2-cdots-2-h-1-2-h-1-个节点"><a href="#性质3：高度为-h-的二叉树至多有-1-2-2-2-cdots-2-h-1-2-h-1-个节点" class="headerlink" title="性质3：高度为$h$的二叉树至多有$1+2+2^2+\cdots+2^{h-1}=2^h-1$个节点"></a>性质3：高度为$h$的二叉树至多有$1+2+2^2+\cdots+2^{h-1}=2^h-1$个节点</h6><p>4.已知一颗完全二叉树的的第$6$层有$8$个叶子节点，求该完全二叉树节点最多和最少分别有多少个</p>
+<p>最少：前$5$层是满二叉树，第$6$层有$8$个节点，节点个数$n_{min}=2^5-1+8=39$</p>
+<p>最多：前$6$层是满二叉树，第$7$层却失了$2\times8$个节点，节点个数$n_{max}=2^7-1-16=111$</p>
+<h6 id="性质4：对完全二叉树层序编号后有如下性质："><a href="#性质4：对完全二叉树层序编号后有如下性质：" class="headerlink" title="性质4：对完全二叉树层序编号后有如下性质："></a>性质4：对完全二叉树层序编号后有如下性质：</h6><ol>
+<li>若$i\leq \lfloor n/2 \rfloor$则$i$为分支节点，否则为叶子节点。</li>
+<li>编号为$i$的节点的双亲节点为$\lfloor i/2 \rfloor$</li>
+<li>若编号为$i$的节点有左孩子，则左孩子节点的编号为$2i$，若有右孩子，则右孩子编号为$2i+1$</li>
+</ol>
+<h6 id="性质6：有-n-个节点的完全二叉树的高度为-lceil-log-2-n-1-rceil"><a href="#性质6：有-n-个节点的完全二叉树的高度为-lceil-log-2-n-1-rceil" class="headerlink" title="性质6：有$n$个节点的完全二叉树的高度为$\lceil log_2(n+1)\rceil$"></a>性质6：有$n$个节点的完全二叉树的高度为$\lceil log_2(n+1)\rceil$</h6><p>5.求一个具有$1025$个节点的二叉树的最小高度和最大高度</p>
+<p>最小：每层都只有一个节点，$h_{max}=1025$</p>
+<p>最大：完全二叉树，$h_{min}=\lceil log_2(1026) \rceil=11$</p>
+<hr>
+<p>6.假设一颗深度为$6$的完全二叉树的第$6$层有$3$个叶子节点，该二叉树共有多少个叶子节点</p>
+<p>该二叉树第$5$层有$2^4=16$个节点，第$6$层的$3$个叶子节点对于第$5$层的$2$个双亲节点，所以第$5$层有$16-2=14$个叶子节点，该二叉树共有$14+3=17$个叶子节点</p>
+<hr>
+<p>7.若一颗完全二叉树有$768$个节点，则该二叉树有多少个叶子节点</p>
+<p>根据$n=n_0+n_1+n_2$和$n_0=n_2+1$得到$n=2n_0+n_1-1$</p>
+<p>完全二叉树的$n_1=0或1$</p>
+<p>$n_1=0$时$n=2n_0-1$，$n_0$不是整数不成立</p>
+<p>$n_1=1$时$n_0=\frac{n}{2}=384$</p>
+<hr>
+<p>8.一颗有$124$个叶子节点的完全二叉树，最多有多少个节点</p>
+<p>根据$n=n_0+n_1+n_2$和$n_0=n_2+1$得$n=124+123+n_1$</p>
+<p>完全二叉树的$n_1=0或1$</p>
+<p>所以$n<em>1=1,n</em>{max}=124+123+1=248$</p>
+<h3 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h3><p>先序遍历：根左右<br>中序遍历：左根右<br>后序遍历：左右根</p>
+<p>同时给定一棵二叉树的先序序列和中序序列或者中序序列和后序序列可以唯一确定二叉树</p>
+<p>同时给定先序序列和后序序列不能唯一确定</p>
+<h3 id="二叉树和森林的相互转换"><a href="#二叉树和森林的相互转换" class="headerlink" title="二叉树和森林的相互转换"></a>二叉树和森林的相互转换</h3><p>森林转二叉树：</p>
+<ol>
+<li>转换：将森林里的每一棵树都转化为二叉树$bt_1,bt_2,…,bt_m$</li>
+<li>连线：将各二叉树的根节点相连</li>
+<li>调整：将$bt_1$的根节点作为整个二叉树的根节点，$bt_2$的根节点作为$bt_1$的右孩子，$bt_3$的根节点作为$bt_2$的右孩子….</li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/17/%E5%86%B3%E7%AD%96%E6%A0%91/">
+                        <span class="hidden-mobile">决策树Decision Tree</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
