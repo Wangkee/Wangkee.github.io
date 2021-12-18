@@ -24,7 +24,7 @@
 <meta property="og:description" content="数据结构1.时间复杂度1.设计一个算法，求含$n$个整数元素的序列中前$i(1\leq i\leq n)$个元素的最大值。并分析算法的平均时间复杂度。 123456789int fun(int a[], int n, int i)&amp;#123;	int j, max &#x3D; a[0];	for(int j &#x3D; 1 ; j &lt;&#x3D; i-1 ; j++)	&amp;#123;		if(a[j] &gt; max">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-12-18T04:43:56.000Z">
-<meta property="article:modified_time" content="2021-12-18T05:22:03.144Z">
+<meta property="article:modified_time" content="2021-12-18T05:35:14.721Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -243,13 +243,15 @@ T(n)=\sum_{i=1}^n\frac{1}{n}\times(i-1)=\frac{1}{n}\sum_{i=1}^n(i-1)=\frac{n-1}{
 <p>2.分析以下算法的时间复杂度和空间复杂度。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">int</span> s = <span class="hljs-number">0</span>,i,j,k;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt;= n ; i++)<br>	&#123;<br>		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span> ; j &lt;= i ; j++)<br>		&#123;<br>			<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span> ; k &lt; j ; k++)<br>			&#123;<br>				s++;<br>			&#125;<br>		&#125;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <script type="math/tex; mode=display">
-T(n)=\sum_{i=0}^n\sum_{j=0}^i\sum_{k=0}^{j-1}1=\sum_{i=0}^n\sum_{j=0}^ij=\sum_{i=0}^n(0+1+2\dots+i)=\sum_{i=0}^n(\frac{i(i+1)}{2})\\ \ \ \ \ \ \ \ \ \ \ =\frac{1}{2}(\sum_{i=0}^ni^2+\sum_{i=0}^ni)=\frac{1}{2}(\frac{1}{6}n(n+1)(2n+1)+\frac{1}{2}n(n+1))=O(n^3)</script><p>时间复杂度为$O(n^3)$，空间复杂度为$O(1)$</p>
+T(n)=\sum_{i=0}^n\sum_{j=0}^i\sum_{k=0}^{j-1}1=\sum_{i=0}^n\sum_{j=0}^ij=\sum_{i=0}^n(0+1+2\dots+i)=\sum_{i=0}^n(\frac{i(i+1)}{2}) \ \ \ \ \ \ \ \ \ \</script><script type="math/tex; mode=display">
+=\frac{1}{2}(\sum_{i=0}^ni^2+\sum_{i=0}^ni)=\frac{1}{2}(\frac{1}{6}n(n+1)(2n+1)+\frac{1}{2}n(n+1))=O(n^3)</script><p>时间复杂度为$O(n^3)$，空间复杂度为$O(1)$</p>
 <p>3.有如下递归算法，调用上述算法的语句为$fun(a,n,0)$，求其时间复杂度和空间复杂度</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> k)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">int</span> i;<br>	<span class="hljs-keyword">if</span>(k == n<span class="hljs-number">-1</span>)<br>	&#123;<br>		<span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span> ; i &lt; n ; i++)<br>		&#123;<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,a[i]);<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">else</span><br>	&#123;<br>		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = k ; i &lt; n ; i++)<br>		&#123;<br>			a[i] = a[i]+i*i;<br>		&#125;<br>		<span class="hljs-built_in">fun</span>(a,n,k+<span class="hljs-number">1</span>);<br>	&#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
 <p>假设$fun(a,n,k)$的执行时间为$T_1(n,k)$</p>
 <script type="math/tex; mode=display">
-\ \ \ \ T(n)=T_1(n,0)=n+T_1(n,1)=n+(n-1)+T_1(n,2) \\ \  = \dots=n+(n-1)+\dots+2+T_1(n,n-1)
-\\= \dots=n+(n-1)+\dots+2+n=O(n^2)</script><p>所以调用$fun(a,n,0)$的时间复杂度为$O(n^2)$</p>
+\ \ \ \ T(n)=T_1(n,0)=n+T_1(n,1)=n+(n-1)+T_1(n,2)</script><script type="math/tex; mode=display">
+\  = \dots=n+(n-1)+\dots+2+T_1(n,n-1)</script><script type="math/tex; mode=display">
+= \dots=n+(n-1)+\dots+2+n=O(n^2)</script><p>所以调用$fun(a,n,0)$的时间复杂度为$O(n^2)$</p>
 <p>假设$fun(a,n,k)$的空间为$S_1(n,k)$</p>
 <script type="math/tex; mode=display">
 S(n)=S_1(n,0)=1+S_1(n,1)=1+1+\dots+1=O(n)</script><p>以调用$fun(a,n,0)$的空间复杂度为$O(n)$</p>
@@ -316,27 +318,28 @@ S(n)=S_1(n,0)=1+S_1(n,1)=1+1+\dots+1=O(n)</script><p>以调用$fun(a,n,0)$的空
 </tbody>
 </table>
 </div>
-<h2 id="4-树"><a href="#4-树" class="headerlink" title="4.树"></a>4.树</h2><h3 id="树的性质"><a href="#树的性质" class="headerlink" title="树的性质"></a>树的性质</h3><h6 id="性质1：树中的节点数等于所有节点的度数加1"><a href="#性质1：树中的节点数等于所有节点的度数加1" class="headerlink" title="性质1：树中的节点数等于所有节点的度数加1"></a>性质1：树中的节点数等于所有节点的度数加1</h6><p>1.在一颗度数为$4$的树中，有$20$个度数为$4$的节点，$10$个度数为$3$的节点，$1$个度为$2$的节点，$10$个度为$1$的节点，求该树叶子节点的个数</p>
+<h2 id="4-树"><a href="#4-树" class="headerlink" title="4.树"></a>4.树</h2><h3 id="树的性质"><a href="#树的性质" class="headerlink" title="树的性质"></a>树的性质</h3><h4 id="性质1：树中的节点数等于所有节点的度数加1"><a href="#性质1：树中的节点数等于所有节点的度数加1" class="headerlink" title="性质1：树中的节点数等于所有节点的度数加1"></a>性质1：树中的节点数等于所有节点的度数加1</h4><p>1.在一颗度数为$4$的树中，有$20$个度数为$4$的节点，$10$个度数为$3$的节点，$1$个度为$2$的节点，$10$个度为$1$的节点，求该树叶子节点的个数</p>
 <p>设$n$为总节点个数，$n_i$为度为$i(0\leq i \leq m)$的节点个数</p>
 <script type="math/tex; mode=display">
-\ \ n=n_1+2n_2+3n_3+4n_4+1=10+2+30+80+1=123 \\
-n_0=n-(n_1+n_2+n_3+n_4)=123-20-10-1-10=82</script><h6 id="性质2：度为-m-的树第-i-层上至多有-m-i-1-个节点"><a href="#性质2：度为-m-的树第-i-层上至多有-m-i-1-个节点" class="headerlink" title="性质2：度为$m$的树第$i$层上至多有$m^{i-1}$个节点"></a>性质2：度为$m$的树第$i$层上至多有$m^{i-1}$个节点</h6><h6 id="性质3：高度为-h-的-m-次树至多有-1-m-m-2-dots-m-h-1-frac-m-k-1-m-1-个节点"><a href="#性质3：高度为-h-的-m-次树至多有-1-m-m-2-dots-m-h-1-frac-m-k-1-m-1-个节点" class="headerlink" title="性质3：高度为$h$的$m$次树至多有$1+m+m^2+\dots+m^{h-1}=\frac{m^k-1}{m-1}$个节点"></a>性质3：高度为$h$的$m$次树至多有$1+m+m^2+\dots+m^{h-1}=\frac{m^k-1}{m-1}$个节点</h6><h6 id="性质4：具有-n-个节点的-m-次树的最小高度为-lceil-log-m-n-m-1-1-rceil"><a href="#性质4：具有-n-个节点的-m-次树的最小高度为-lceil-log-m-n-m-1-1-rceil" class="headerlink" title="性质4：具有$n$个节点的$m$次树的最小高度为$\lceil log_m(n(m-1)+1)\rceil$"></a>性质4：具有$n$个节点的$m$次树的最小高度为$\lceil log_m(n(m-1)+1)\rceil$</h6><p>2.含有$n$个节点的$3$次树的最小高度是多少？最大高度是多少</p>
+\ \ n=n_1+2n_2+3n_3+4n_4+1=10+2+30+80+1=123</script><script type="math/tex; mode=display">
+n_0=n-(n_1+n_2+n_3+n_4)=123-20-10-1-10=82</script><h4 id="性质2：度为-m-的树第-i-层上至多有-m-i-1-个节点"><a href="#性质2：度为-m-的树第-i-层上至多有-m-i-1-个节点" class="headerlink" title="性质2：度为$m$的树第$i$层上至多有$m^{i-1}$个节点"></a>性质2：度为$m$的树第$i$层上至多有$m^{i-1}$个节点</h4><h4 id="性质3：高度为-h-的-m-次树至多有-1-m-m-2-dots-m-h-1-frac-m-k-1-m-1-个节点"><a href="#性质3：高度为-h-的-m-次树至多有-1-m-m-2-dots-m-h-1-frac-m-k-1-m-1-个节点" class="headerlink" title="性质3：高度为$h$的$m$次树至多有$1+m+m^2+\dots+m^{h-1}=\frac{m^k-1}{m-1}$个节点"></a>性质3：高度为$h$的$m$次树至多有$1+m+m^2+\dots+m^{h-1}=\frac{m^k-1}{m-1}$个节点</h4><h4 id="性质4：具有-n-个节点的-m-次树的最小高度为-lceil-log-m-n-m-1-1-rceil"><a href="#性质4：具有-n-个节点的-m-次树的最小高度为-lceil-log-m-n-m-1-1-rceil" class="headerlink" title="性质4：具有$n$个节点的$m$次树的最小高度为$\lceil log_m(n(m-1)+1)\rceil$"></a>性质4：具有$n$个节点的$m$次树的最小高度为$\lceil log_m(n(m-1)+1)\rceil$</h4><p>2.含有$n$个节点的$3$次树的最小高度是多少？最大高度是多少</p>
 <p>设最小高度为$h$，则有</p>
 <script type="math/tex; mode=display">
-\ \ \ \ 1+3^1+3^2+\cdots+3^{h-2}<n\leq1+3^1+3^2+\cdots+3^{h-1}\\
-\frac{3^{h-1}-1}{2}<n\leq\frac{3^h-1}{2} \\ 3^{h-1}<2n+1\leq3^h \\
+\ \ \ \ 1+3^1+3^2+\cdots+3^{h-2}<n\leq1+3^1+3^2+\cdots+3^{h-1}</script><script type="math/tex; mode=display">
+\frac{3^{h-1}-1}{2}<n\leq\frac{3^h-1}{2}</script><script type="math/tex; mode=display">
+3^{h-1}<2n+1\leq3^h</script><script type="math/tex; mode=display">
 h = \lceil log_3(2n+1)\rceil</script><p>某层有$3$个节点，其余层都只有$1$个节点时高度最大为$n-2$</p>
-<h3 id="二叉树的性质"><a href="#二叉树的性质" class="headerlink" title="二叉树的性质"></a>二叉树的性质</h3><h6 id="性质1：非空二叉树上叶子节点的个数等于双分支节点数加1，即-n-0-n-2-1"><a href="#性质1：非空二叉树上叶子节点的个数等于双分支节点数加1，即-n-0-n-2-1" class="headerlink" title="性质1：非空二叉树上叶子节点的个数等于双分支节点数加1，即$n_0=n_2+1$"></a><strong>性质1：非空二叉树上叶子节点的个数等于双分支节点数加1，即$n_0=n_2+1$</strong></h6><p>3.具有$10$个叶子节点的二叉树中有几个度为$2$的节点</p>
+<h3 id="二叉树的性质"><a href="#二叉树的性质" class="headerlink" title="二叉树的性质"></a>二叉树的性质</h3><h4 id="性质1：非空二叉树上叶子节点的个数等于双分支节点数加1，即-n-0-n-2-1"><a href="#性质1：非空二叉树上叶子节点的个数等于双分支节点数加1，即-n-0-n-2-1" class="headerlink" title="性质1：非空二叉树上叶子节点的个数等于双分支节点数加1，即$n_0=n_2+1$"></a><strong>性质1：非空二叉树上叶子节点的个数等于双分支节点数加1，即$n_0=n_2+1$</strong></h4><p>3.具有$10$个叶子节点的二叉树中有几个度为$2$的节点</p>
 <script type="math/tex; mode=display">
-n_2=n_0-1=10-1-9</script><h6 id="性质2：非空二叉树上的第-i-层至多有-2-i-1-个节点"><a href="#性质2：非空二叉树上的第-i-层至多有-2-i-1-个节点" class="headerlink" title="性质2：非空二叉树上的第$i$层至多有$2^{i-1}$个节点"></a>性质2：非空二叉树上的第$i$层至多有$2^{i-1}$个节点</h6><h6 id="性质3：高度为-h-的二叉树至多有-1-2-2-2-cdots-2-h-1-2-h-1-个节点"><a href="#性质3：高度为-h-的二叉树至多有-1-2-2-2-cdots-2-h-1-2-h-1-个节点" class="headerlink" title="性质3：高度为$h$的二叉树至多有$1+2+2^2+\cdots+2^{h-1}=2^h-1$个节点"></a>性质3：高度为$h$的二叉树至多有$1+2+2^2+\cdots+2^{h-1}=2^h-1$个节点</h6><p>4.已知一颗完全二叉树的的第$6$层有$8$个叶子节点，求该完全二叉树节点最多和最少分别有多少个</p>
+n_2=n_0-1=10-1-9</script><h4 id="性质2：非空二叉树上的第-i-层至多有-2-i-1-个节点"><a href="#性质2：非空二叉树上的第-i-层至多有-2-i-1-个节点" class="headerlink" title="性质2：非空二叉树上的第$i$层至多有$2^{i-1}$个节点"></a>性质2：非空二叉树上的第$i$层至多有$2^{i-1}$个节点</h4><h4 id="性质3：高度为-h-的二叉树至多有-1-2-2-2-cdots-2-h-1-2-h-1-个节点"><a href="#性质3：高度为-h-的二叉树至多有-1-2-2-2-cdots-2-h-1-2-h-1-个节点" class="headerlink" title="性质3：高度为$h$的二叉树至多有$1+2+2^2+\cdots+2^{h-1}=2^h-1$个节点"></a>性质3：高度为$h$的二叉树至多有$1+2+2^2+\cdots+2^{h-1}=2^h-1$个节点</h4><p>4.已知一颗完全二叉树的的第$6$层有$8$个叶子节点，求该完全二叉树节点最多和最少分别有多少个</p>
 <p>最少：前$5$层是满二叉树，第$6$层有$8$个节点，节点个数$n_{min}=2^5-1+8=39$</p>
 <p>最多：前$6$层是满二叉树，第$7$层却失了$2\times8$个节点，节点个数$n_{max}=2^7-1-16=111$</p>
-<h6 id="性质4：对完全二叉树层序编号后有如下性质："><a href="#性质4：对完全二叉树层序编号后有如下性质：" class="headerlink" title="性质4：对完全二叉树层序编号后有如下性质："></a>性质4：对完全二叉树层序编号后有如下性质：</h6><ol>
+<h4 id="性质4：对完全二叉树层序编号后有如下性质："><a href="#性质4：对完全二叉树层序编号后有如下性质：" class="headerlink" title="性质4：对完全二叉树层序编号后有如下性质："></a>性质4：对完全二叉树层序编号后有如下性质：</h4><ol>
 <li>若$i\leq \lfloor n/2 \rfloor$则$i$为分支节点，否则为叶子节点。</li>
 <li>编号为$i$的节点的双亲节点为$\lfloor i/2 \rfloor$</li>
 <li>若编号为$i$的节点有左孩子，则左孩子节点的编号为$2i$，若有右孩子，则右孩子编号为$2i+1$</li>
 </ol>
-<h6 id="性质6：有-n-个节点的完全二叉树的高度为-lceil-log-2-n-1-rceil"><a href="#性质6：有-n-个节点的完全二叉树的高度为-lceil-log-2-n-1-rceil" class="headerlink" title="性质6：有$n$个节点的完全二叉树的高度为$\lceil log_2(n+1)\rceil$"></a>性质6：有$n$个节点的完全二叉树的高度为$\lceil log_2(n+1)\rceil$</h6><p>5.求一个具有$1025$个节点的二叉树的最小高度和最大高度</p>
+<h4 id="性质6：有-n-个节点的完全二叉树的高度为-lceil-log-2-n-1-rceil"><a href="#性质6：有-n-个节点的完全二叉树的高度为-lceil-log-2-n-1-rceil" class="headerlink" title="性质6：有$n$个节点的完全二叉树的高度为$\lceil log_2(n+1)\rceil$"></a>性质6：有$n$个节点的完全二叉树的高度为$\lceil log_2(n+1)\rceil$</h4><p>5.求一个具有$1025$个节点的二叉树的最小高度和最大高度</p>
 <p>最小：每层都只有一个节点，$h_{max}=1025$</p>
 <p>最大：完全二叉树，$h_{min}=\lceil log_2(1026) \rceil=11$</p>
 <hr>
